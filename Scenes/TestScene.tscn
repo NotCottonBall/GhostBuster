@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=3 uid="uid://yiq4cbrku1v7"]
+
+[ext_resource type="PackedScene" uid="uid://wtjsp55jknd1" path="res://Scenes/Player.tscn" id="1_b5ayd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5lt6y"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_8k7wh"]
+sky_material = SubResource("ProceduralSkyMaterial_5lt6y")
+
+[sub_resource type="Environment" id="Environment_iufkg"]
+background_mode = 2
+sky = SubResource("Sky_8k7wh")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b5ayd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5lt6y"]
+albedo_color = Color(0.21176471, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8k7wh"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_iufkg"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0f5h7"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_iufkg")
+
+[node name="Player" parent="." instance=ExtResource("1_b5ayd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013, 1, 0.003)
+
+[node name="Cubes" type="Node3D" parent="."]
+
+[node name="Cube" type="StaticBody3D" parent="Cubes"]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -10.634617, 1.963671, -9.186745)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cubes/Cube"]
+shape = SubResource("BoxShape3D_b5ayd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cubes/Cube"]
+material_override = SubResource("StandardMaterial3D_5lt6y")
+mesh = SubResource("BoxMesh_8k7wh")
+
+[node name="Cube2" type="StaticBody3D" parent="Cubes"]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 9.456043, 1.963671, -9.186745)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cubes/Cube2"]
+shape = SubResource("BoxShape3D_b5ayd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cubes/Cube2"]
+material_override = SubResource("StandardMaterial3D_5lt6y")
+mesh = SubResource("BoxMesh_8k7wh")
+
+[node name="Cube3" type="StaticBody3D" parent="Cubes"]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 9.456043, 1.963671, 6.280838)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cubes/Cube3"]
+shape = SubResource("BoxShape3D_b5ayd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cubes/Cube3"]
+material_override = SubResource("StandardMaterial3D_5lt6y")
+mesh = SubResource("BoxMesh_8k7wh")
+
+[node name="Cube4" type="StaticBody3D" parent="Cubes"]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -9.759485, 1.963671, 6.280838)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cubes/Cube4"]
+shape = SubResource("BoxShape3D_b5ayd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cubes/Cube4"]
+material_override = SubResource("StandardMaterial3D_5lt6y")
+mesh = SubResource("BoxMesh_8k7wh")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_iufkg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("ConcavePolygonShape3D_0f5h7")
