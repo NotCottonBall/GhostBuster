@@ -3,16 +3,24 @@ extends CharacterBody3D
 
 var m_CurrentPlayerSpeed: float = 0.0
 var m_CurrentPlayerStamina: float = 0.0
+var m_Yaw: float = 0.0
+var m_Pitch: float = 0.0
+
+@export_group("Movement Settings")
 @export var PlayerRunSpeed: float = 8.0
 @export var PlayerWalkSpeed: float = 5.0
 @export var PlayerMaxStamina: float = 100.0
 @export var StaminaReductionRate: float = 30.0
 @export var StaminaGainRate: float = 10.0
 
+@export_group("Camera Settings")
+@export var MouseSensiticity: float = 0.4
+
 func _ready() -> void:
 	m_CurrentPlayerSpeed = PlayerWalkSpeed
 	m_CurrentPlayerStamina = PlayerMaxStamina
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	m_Pitch = 0.0
 
 func _process(delta: float) -> void:
 	print(m_CurrentPlayerStamina)
@@ -38,6 +46,15 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		m_Yaw -= event.relative.x * MouseSensiticity
+		m_Pitch -= event.relative.y * MouseSensiticity
+		m_Pitch = clamp(m_Pitch, -89.0, 89.0)
+
+		rotation_degrees.y = m_Yaw
+		$Head.rotation_degrees.x = m_Pitch
 
 func EnableSprint(delta: float) -> void:
 	m_CurrentPlayerSpeed = PlayerRunSpeed
