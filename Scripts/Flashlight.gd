@@ -1,0 +1,18 @@
+extends Item
+class_name Flashlight
+
+@export var m_Light: SpotLight3D
+
+func _init() -> void:
+  ItemID = HoldableItems.Flashlight
+
+func _ready() -> void:
+  m_Light = $SpotLight3D
+  m_Light.visible = false
+
+func OnAction() -> void:
+  m_Light.visible = !m_Light.visible
+
+
+func OnInbuiltAction() -> void:
+  pass

@@ -1,12 +1,8 @@
 extends CharacterBody3D
 
-
+@export_group("Movement Settings")
 var m_CurrentPlayerSpeed: float = 0.0
 var m_CurrentPlayerStamina: float = 0.0
-var m_Yaw: float = 0.0
-var m_Pitch: float = 0.0
-
-@export_group("Movement Settings")
 @export var PlayerRunSpeed: float = 8.0
 @export var PlayerWalkSpeed: float = 5.0
 @export var PlayerMaxStamina: float = 100.0
@@ -14,16 +10,28 @@ var m_Pitch: float = 0.0
 @export var StaminaGainRate: float = 10.0
 
 @export_group("Camera Settings")
+var m_Camera: Camera3D
+var m_Yaw: float = 0.0
+var m_Pitch: float = 0.0
 @export var MouseSensiticity: float = 0.4
+
+@export_group("Item Holder")
+var m_ItemHolder: ItemHolder
+var m_CurrentHoldingIndex: int = 0
+@export var m_InteractionRayLength: float = 2.0
 
 func _ready() -> void:
 	m_CurrentPlayerSpeed = PlayerWalkSpeed
 	m_CurrentPlayerStamina = PlayerMaxStamina
+	m_Camera = $Head/Camera3D
+	m_ItemHolder = $Head/ItemHolder
+
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
 	m_Pitch = 0.0
 
 func _process(delta: float) -> void:
-	print(m_CurrentPlayerStamina)
+	pass
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -55,6 +63,52 @@ func _input(event: InputEvent) -> void:
 
 		rotation_degrees.y = m_Yaw
 		$Head.rotation_degrees.x = m_Pitch
+
+	if event.is_action_pressed("SecondaryAction"):
+		m_ItemHolder.PlayerInventory[m_CurrentHoldingIndex].OnAction()
+	
+	if event.is_action_pressed("Interact"):
+		Interact()
+	if event.is_action_pressed("Drop"):
+		m_ItemHolder.DropItem(m_CurrentHoldingIndex)
+	
+	if event.is_action_pressed("FirstHolder"):
+		m_CurrentHoldingIndex = 0
+		m_ItemHolder.SwitchHoldingItem(m_CurrentHoldingIndex)
+	if event.is_action_pressed("SecondHolder"):
+		m_CurrentHoldingIndex = 1
+		m_ItemHolder.SwitchHoldingItem(m_CurrentHoldingIndex)
+	if event.is_action_pressed("ThirdHolder"):
+		m_CurrentHoldingIndex = 2
+		m_ItemHolder.SwitchHoldingItem(m_CurrentHoldingIndex)
+	if event.is_action_pressed("SwitchHolder"):
+		m_CurrentHoldingIndex = (m_CurrentHoldingIndex + 1) % m_ItemHolder.MaxHoldableItems
+		m_ItemHolder.SwitchHoldingItem(m_CurrentHoldingIndex)
+
+func Interact() -> void:
+	var ray: Dictionary = Raycast()
+	if ray.is_empty():
+		return
+
+	if ray.collider is Item:
+		var item: Item = ray.collider
+		m_ItemHolder.HoldItem(m_CurrentHoldingIndex, item)
+
+func Raycast() -> Dictionary:
+	var viewportSize: Vector2 = get_viewport().get_visible_rect().size
+	var viewportCenter: Vector2 = viewportSize / 2
+	
+	var rayOrigin: Vector3 = m_Camera.project_ray_origin(viewportCenter)
+	var rayDirection: Vector3 = m_Camera.project_ray_normal(viewportCenter)
+	var rayEnd: Vector3 = rayOrigin + rayDirection * m_InteractionRayLength
+
+	var ray: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd)
+	ray.collide_with_areas = true
+	ray.collide_with_bodies = true
+
+	var spaceState: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
+	return spaceState.intersect_ray(ray)
+
 
 func EnableSprint(delta: float) -> void:
 	m_CurrentPlayerSpeed = PlayerRunSpeed
