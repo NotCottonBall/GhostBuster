@@ -6,7 +6,13 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_0qj7l"]
 size = Vector3(0.17578125, 0.16699219, 0.6308594)
 
-[node name="Flashlight" type="StaticBody3D"]
+[node name="Flashlight" type="RigidBody3D"]
+collision_layer = 4
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
 script = ExtResource("1_bdlob")
 metadata/_custom_type_script = "uid://cijyo04ga1ybp"
 

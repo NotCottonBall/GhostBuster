@@ -33,7 +33,12 @@ environment = SubResource("Environment_e05af")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+visible = false
 light_energy = 0.004
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_kg6ww")]
@@ -92,3 +97,9 @@ shape = SubResource("ConcavePolygonShape3D_0f5h7")
 
 [node name="Flashlight" parent="." instance=ExtResource("2_fgmgd")]
 transform = Transform3D(0.3165266, 0, -0.94858366, 0, 1, 0, 0.94858366, 0, 0.3165266, -0.34078074, 0.9969348, -5.644721)
+
+[node name="Flashlight2" parent="." instance=ExtResource("2_fgmgd")]
+transform = Transform3D(0.3165266, 0, -0.94858366, 0, 1, 0, 0.94858366, 0, 0.3165266, 2.3793902, 0.9969348, -6.3000107)
+
+[node name="Flashlight3" parent="." instance=ExtResource("2_fgmgd")]
+transform = Transform3D(0.3165266, 0, -0.94858366, 0, 1, 0, 0.94858366, 0, 0.3165266, 2.5910406, 0.9969348, -4.993935)

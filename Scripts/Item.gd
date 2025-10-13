@@ -1,4 +1,4 @@
-extends StaticBody3D
+extends RigidBody3D
 class_name Item
 
 enum HoldableItems
@@ -16,4 +16,7 @@ func OnAction() -> void:
 	pass
 
 func OnInbuiltAction() -> void:
+	pass
+
+func _process(delta: float) -> void:
 	pass
