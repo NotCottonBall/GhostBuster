@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GhostBuster"
-run/main_scene="uid://yiq4cbrku1v7"
+run/main_scene="uid://b6xt82pp18ybh"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 

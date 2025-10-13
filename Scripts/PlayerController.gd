@@ -21,14 +21,14 @@ var m_Pitch: float = 0.0
 @export_group("Item Holder")
 var m_ItemHolder: ItemHolder
 var m_CurrentHoldingIndex: int = 0
-@export var m_InteractionRayLength: float = 2.0
+@export var m_InteractionRayLength: float = 2.5
 
 func _ready() -> void:
 	m_CurrentPlayerSpeed = PlayerWalkSpeed
 	m_CurrentPlayerStamina = PlayerMaxStamina
 	m_Camera = $Head/Camera3D
 	m_ItemHolder = $Head/ItemHolder
-
+	
 	if m_MouseCaptured:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	

@@ -56,6 +56,36 @@ shape = SubResource("BoxShape3D_b5ayd")
 material_override = SubResource("StandardMaterial3D_5lt6y")
 mesh = SubResource("BoxMesh_8k7wh")
 
+[node name="Cube5" type="StaticBody3D" parent="Cubes"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -1.2773151, -1.3500626, -9.186745)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cubes/Cube5"]
+shape = SubResource("BoxShape3D_b5ayd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cubes/Cube5"]
+material_override = SubResource("StandardMaterial3D_5lt6y")
+mesh = SubResource("BoxMesh_8k7wh")
+
+[node name="Cube7" type="StaticBody3D" parent="Cubes"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -4.7688847, -1.2865231, -9.186745)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cubes/Cube7"]
+shape = SubResource("BoxShape3D_b5ayd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cubes/Cube7"]
+material_override = SubResource("StandardMaterial3D_5lt6y")
+mesh = SubResource("BoxMesh_8k7wh")
+
+[node name="Cube6" type="StaticBody3D" parent="Cubes"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.4895518, -1.446682, -9.186745)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cubes/Cube6"]
+shape = SubResource("BoxShape3D_b5ayd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cubes/Cube6"]
+material_override = SubResource("StandardMaterial3D_5lt6y")
+mesh = SubResource("BoxMesh_8k7wh")
+
 [node name="Cube2" type="StaticBody3D" parent="Cubes"]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 9.456043, 1.963671, -9.186745)
 
