@@ -9,6 +9,9 @@ var m_CurrentPlayerStamina: float = 0.0
 @export var StaminaReductionRate: float = 30.0
 @export var StaminaGainRate: float = 10.0
 
+# Todo: Remove this before exporting
+var m_MouseCaptured: bool = true
+
 @export_group("Camera Settings")
 var m_Camera: Camera3D
 var m_Yaw: float = 0.0
@@ -26,7 +29,8 @@ func _ready() -> void:
 	m_Camera = $Head/Camera3D
 	m_ItemHolder = $Head/ItemHolder
 
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if m_MouseCaptured:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	m_Pitch = 0.0
 
@@ -65,25 +69,34 @@ func _input(event: InputEvent) -> void:
 		$Head.rotation_degrees.x = m_Pitch
 
 	if event.is_action_pressed("SecondaryAction"):
-		m_ItemHolder.PlayerInventory[m_CurrentHoldingIndex].OnAction()
+		var item: Item = m_ItemHolder.PlayerInventory[m_CurrentHoldingIndex]
+		if item:
+			item.OnAction()
+
+	if event.is_action_pressed("Pause"):
+		m_MouseCaptured = !m_MouseCaptured
+		if m_MouseCaptured:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	if event.is_action_pressed("Interact"):
 		Interact()
 	if event.is_action_pressed("Drop"):
-		m_ItemHolder.DropItem(m_CurrentHoldingIndex)
+		m_ItemHolder.DropItem(m_CurrentHoldingIndex, transform, get_parent())
 	
 	if event.is_action_pressed("FirstHolder"):
+		m_ItemHolder.SwitchHoldingItem(m_CurrentHoldingIndex, 0)
 		m_CurrentHoldingIndex = 0
-		m_ItemHolder.SwitchHoldingItem(m_CurrentHoldingIndex)
 	if event.is_action_pressed("SecondHolder"):
+		m_ItemHolder.SwitchHoldingItem(m_CurrentHoldingIndex, 1)
 		m_CurrentHoldingIndex = 1
-		m_ItemHolder.SwitchHoldingItem(m_CurrentHoldingIndex)
 	if event.is_action_pressed("ThirdHolder"):
+		m_ItemHolder.SwitchHoldingItem(m_CurrentHoldingIndex, 2)
 		m_CurrentHoldingIndex = 2
-		m_ItemHolder.SwitchHoldingItem(m_CurrentHoldingIndex)
 	if event.is_action_pressed("SwitchHolder"):
+		m_ItemHolder.SwitchHoldingItem(m_CurrentHoldingIndex, (m_CurrentHoldingIndex + 1) % m_ItemHolder.MaxHoldableItems)
 		m_CurrentHoldingIndex = (m_CurrentHoldingIndex + 1) % m_ItemHolder.MaxHoldableItems
-		m_ItemHolder.SwitchHoldingItem(m_CurrentHoldingIndex)
 
 func Interact() -> void:
 	var ray: Dictionary = Raycast()

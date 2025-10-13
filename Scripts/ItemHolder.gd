@@ -25,13 +25,26 @@ func HoldItem(index: int, item: Item) -> void:
 	item.transform = Transform3D.IDENTITY
 
 
-func DropItem(index: int) -> void:
+func DropItem(index: int, newSpawnLocation: Transform3D, parent: Node) -> void:
 	if index >= MaxHoldableItems or not is_instance_valid(PlayerInventory[index]):
 		return
 	
+	var item: Item = PlayerInventory[index]
 	PlayerInventory[index] = null
-	remove_child(PlayerInventory[index])
+	remove_child(item)
+
+	parent.add_child(item)
+	item.transform = newSpawnLocation
+	
+	print("ITEM DROPPED")
 
 
-func SwitchHoldingItem(index: int) -> void:
-	pass
+func SwitchHoldingItem(oldIndex: int, newIndex: int) -> void:
+	if is_instance_valid(PlayerInventory[oldIndex]):
+		var item: Item = PlayerInventory[oldIndex]
+		item.visible = false
+	
+	if is_instance_valid(PlayerInventory[newIndex]):
+		var item: Item = PlayerInventory[newIndex]
+		item.visible = true
+		CurrentHoldingItem = item

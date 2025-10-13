@@ -13,7 +13,7 @@ enum HoldableItems
 @export var ItemID: HoldableItems
 
 func OnAction() -> void:
-	push_error("OnAction Was Not Implemented In One Of Item's Children")
+	pass
 
 func OnInbuiltAction() -> void:
-	push_error("OnInbuiltAction Was Not Implemented In One Of Item's Children")
+	pass
