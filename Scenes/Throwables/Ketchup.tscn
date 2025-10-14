@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bx4k2m0j2775"]
+
+[ext_resource type="Script" uid="uid://b0yn76m6fi3ne" path="res://Scripts/Throwable.gd" id="1_xiafb"]
+[ext_resource type="PackedScene" uid="uid://uoxblogu3ixt" path="res://Models/Throwables/Ketchup.glb" id="2_guglm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mndxd"]
+size = Vector3(0.08618164, 0.24328613, 0.1003418)
+
+[node name="Ketchup" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 13
+script = ExtResource("1_xiafb")
+metadata/_custom_type_script = "uid://b0yn76m6fi3ne"
+
+[node name="Ketchup" parent="." instance=ExtResource("2_guglm")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0013427734, 0.12298584, -0.00012207031)
+shape = SubResource("BoxShape3D_mndxd")

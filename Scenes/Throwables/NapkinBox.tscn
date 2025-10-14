@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://x8kqnh1ovg4a"]
+
+[ext_resource type="Script" uid="uid://b0yn76m6fi3ne" path="res://Scripts/Throwable.gd" id="1_5sj15"]
+[ext_resource type="PackedScene" uid="uid://b0ei1beqkcxdu" path="res://Models/Throwables/NapkinRing.glb" id="2_hrl0o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x700o"]
+size = Vector3(0.15332031, 0.2763672, 0.15332031)
+
+[node name="NapkinBox" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 13
+script = ExtResource("1_5sj15")
+metadata/_custom_type_script = "uid://b0yn76m6fi3ne"
+
+[node name="NapkinRing" parent="." instance=ExtResource("2_hrl0o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13720703, 0)
+shape = SubResource("BoxShape3D_x700o")

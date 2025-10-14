@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfww8fpv7p5k4"]
+
+[ext_resource type="Script" uid="uid://b0yn76m6fi3ne" path="res://Scripts/Throwable.gd" id="1_2r3md"]
+[ext_resource type="PackedScene" uid="uid://dv65vawf66ofu" path="res://Models/Throwables/Donut.glb" id="2_hlha5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hlha5"]
+size = Vector3(0.20898438, 0.065979004, 0.21972656)
+
+[node name="Donut" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 13
+script = ExtResource("1_2r3md")
+metadata/_custom_type_script = "uid://b0yn76m6fi3ne"
+
+[node name="Donut2" parent="." instance=ExtResource("2_hlha5")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03060913, 0)
+shape = SubResource("BoxShape3D_hlha5")
+debug_color = Color(0, 0.78039217, 0.9137255, 1)

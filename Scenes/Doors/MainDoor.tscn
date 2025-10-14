@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdb0gx35uwvb4"]
+
+[ext_resource type="Script" uid="uid://qboy84mteblk" path="res://Scripts/Door.gd" id="1_38ogf"]
+[ext_resource type="PackedScene" uid="uid://dw5x3teel4nuf" path="res://Models/Interactables/MainDoor.glb" id="2_80ftm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v8tpj"]
+size = Vector3(1.4558411, 2.6854858, 0.09765625)
+
+[node name="MainDoor" type="StaticBody3D"]
+script = ExtResource("1_38ogf")
+m_OpenRotation = 90.0
+metadata/_custom_type_script = "uid://qboy84mteblk"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72727966, 1.3449402, -0.00793457)
+shape = SubResource("BoxShape3D_v8tpj")
+debug_color = Color(0.34764582, 0.7036422, 0.99999994, 1)
+
+[node name="MainDoor" parent="." instance=ExtResource("2_80ftm")]

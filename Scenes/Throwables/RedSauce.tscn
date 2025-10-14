@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://br87e6ljv7bni"]
+
+[ext_resource type="Script" uid="uid://b0yn76m6fi3ne" path="res://Scripts/Throwable.gd" id="1_bof3b"]
+[ext_resource type="PackedScene" uid="uid://cgbidmlidu7hv" path="res://Models/Throwables/SauceRed.glb" id="2_wbjru"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tw7qj"]
+size = Vector3(0.26464844, 0.10345459, 0.24804688)
+
+[node name="RedSauce" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 13
+script = ExtResource("1_bof3b")
+metadata/_custom_type_script = "uid://b0yn76m6fi3ne"
+
+[node name="SauceRed" parent="." instance=ExtResource("2_wbjru")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.054595947, 0)
+shape = SubResource("BoxShape3D_tw7qj")

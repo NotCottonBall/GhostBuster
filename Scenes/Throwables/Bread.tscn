@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cylovrj44xu71"]
+
+[ext_resource type="Script" uid="uid://b0yn76m6fi3ne" path="res://Scripts/Throwable.gd" id="1_xpm5l"]
+[ext_resource type="PackedScene" uid="uid://bmigq35nkmwcj" path="res://Models/Throwables/Bread.glb" id="2_3fmri"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w32gl"]
+size = Vector3(0.4130249, 0.093444824, 0.15136719)
+
+[node name="Bread" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 13
+script = ExtResource("1_xpm5l")
+metadata/_custom_type_script = "uid://b0yn76m6fi3ne"
+
+[node name="Bread" parent="." instance=ExtResource("2_3fmri")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00039672852, 0.046905518, 0)
+shape = SubResource("BoxShape3D_w32gl")
+debug_color = Color(0, 0.6, 0.69803923, 1)

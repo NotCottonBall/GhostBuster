@@ -1,18 +1,22 @@
-[gd_scene load_steps=12 format=3 uid="uid://yiq4cbrku1v7"]
+[gd_scene load_steps=16 format=3 uid="uid://yiq4cbrku1v7"]
 
 [ext_resource type="Texture2D" uid="uid://35ewlixdxa6i" path="res://Textures/Skybox.png" id="1_fgmgd"]
 [ext_resource type="PackedScene" uid="uid://wtjsp55jknd1" path="res://Scenes/Player.tscn" id="1_kg6ww"]
-[ext_resource type="PackedScene" uid="uid://si135ryvn324" path="res://Scenes/Flashlight.tscn" id="2_fgmgd"]
+[ext_resource type="PackedScene" uid="uid://si135ryvn324" path="res://Scenes/Items/Flashlight.tscn" id="2_fgmgd"]
+[ext_resource type="PackedScene" uid="uid://cdb0gx35uwvb4" path="res://Scenes/Doors/MainDoor.tscn" id="4_gk3qg"]
+[ext_resource type="PackedScene" uid="uid://cylovrj44xu71" path="res://Scenes/Throwables/Bread.tscn" id="5_e05af"]
+[ext_resource type="PackedScene" uid="uid://dfww8fpv7p5k4" path="res://Scenes/Throwables/Donut.tscn" id="6_fdlwa"]
+[ext_resource type="PackedScene" uid="uid://5bfrmrcjyibn" path="res://Scenes/Ghost.tscn" id="7_fdlwa"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_013s3"]
 panorama = ExtResource("1_fgmgd")
 
-[sub_resource type="Sky" id="Sky_gk3qg"]
+[sub_resource type="Sky" id="Sky_fdlwa"]
 sky_material = SubResource("PanoramaSkyMaterial_013s3")
 
 [sub_resource type="Environment" id="Environment_e05af"]
 background_mode = 2
-sky = SubResource("Sky_gk3qg")
+sky = SubResource("Sky_fdlwa")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b5ayd"]
 
@@ -42,7 +46,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_kg6ww")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013, 1, 0.003)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0864315, 1, 0.003)
 
 [node name="Cubes" type="Node3D" parent="."]
 
@@ -133,3 +137,60 @@ transform = Transform3D(0.3165266, 0, -0.94858366, 0, 1, 0, 0.94858366, 0, 0.316
 
 [node name="Flashlight3" parent="." instance=ExtResource("2_fgmgd")]
 transform = Transform3D(0.3165266, 0, -0.94858366, 0, 1, 0, 0.94858366, 0, 0.3165266, 2.5910406, 0.9969348, -4.993935)
+
+[node name="Door" parent="." instance=ExtResource("4_gk3qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09935945, 0, -13.31636)
+
+[node name="Throwables" type="Node3D" parent="."]
+
+[node name="Bread" parent="Throwables" instance=ExtResource("5_e05af")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5295594, 3.7252903e-09, 0.5610902)
+
+[node name="Donut" parent="Throwables" instance=ExtResource("6_fdlwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.749797, 1.8626451e-09, 2.0434337)
+
+[node name="Donut2" parent="Throwables" instance=ExtResource("6_fdlwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.97715145, -3.7066638e-07, 1.8078234)
+
+[node name="Bread2" parent="Throwables" instance=ExtResource("5_e05af")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.974373, -3.6880374e-07, 0.16677715)
+
+[node name="Bread3" parent="Throwables" instance=ExtResource("5_e05af")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.679504, 3.7252903e-09, 0.5610902)
+
+[node name="Donut3" parent="Throwables" instance=ExtResource("6_fdlwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.634526, 0.10693145, 1.6987709)
+
+[node name="Donut4" parent="Throwables" instance=ExtResource("6_fdlwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.231912, -3.7066638e-07, 1.8078234)
+
+[node name="Bread4" parent="Throwables" instance=ExtResource("5_e05af")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.234691, -3.6880374e-07, 0.16677715)
+
+[node name="Bread5" parent="Throwables" instance=ExtResource("5_e05af")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3714008, 3.7252903e-09, 10.108652)
+
+[node name="Donut5" parent="Throwables" instance=ExtResource("6_fdlwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.416379, 1.8626451e-09, 11.246333)
+
+[node name="Donut6" parent="Throwables" instance=ExtResource("6_fdlwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81899357, -3.7066638e-07, 11.355386)
+
+[node name="Bread6" parent="Throwables" instance=ExtResource("5_e05af")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7688182, -3.6880374e-07, 9.714339)
+
+[node name="GhostSpawnPoints" type="Node3D" parent="."]
+
+[node name="Node3D" type="Node3D" parent="GhostSpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8360481, 0, 1.5040398)
+
+[node name="Node3D2" type="Node3D" parent="GhostSpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0579815, 0, 1.5040398)
+
+[node name="Node3D3" type="Node3D" parent="GhostSpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0934086, 0, 9.508199)
+
+[node name="Ghost" parent="." node_paths=PackedStringArray("m_SpawnPoints") instance=ExtResource("7_fdlwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5253584, 0.9513782, 2.3097067)
+m_SpawnPoints = [NodePath("../GhostSpawnPoints/Node3D"), NodePath("../GhostSpawnPoints/Node3D2"), NodePath("../GhostSpawnPoints/Node3D3")]
+ThrowChance = 0.5

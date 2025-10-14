@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxu4ghe7n8o21"]
+
+[ext_resource type="Script" uid="uid://b0yn76m6fi3ne" path="res://Scripts/Throwable.gd" id="1_5sxrs"]
+[ext_resource type="PackedScene" uid="uid://c12uieyi1vqc7" path="res://Models/Throwables/SaltShaker.glb" id="2_vu703"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hppaa"]
+size = Vector3(0.07330322, 0.13012695, 0.0635376)
+
+[node name="SaltShaker" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 13
+script = ExtResource("1_5sxrs")
+metadata/_custom_type_script = "uid://b0yn76m6fi3ne"
+
+[node name="SaltShaker" parent="." instance=ExtResource("2_vu703")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0015563965, 0.06726074, -0.0043029785)
+shape = SubResource("BoxShape3D_hppaa")

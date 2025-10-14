@@ -106,6 +106,11 @@ func Interact() -> void:
 	if ray.collider is Item:
 		var item: Item = ray.collider
 		m_ItemHolder.HoldItem(m_CurrentHoldingIndex, item)
+	
+	if ray.collider is Door:
+		print(ray.collider.name)
+		ray.collider.ToggleDoor()
+
 
 func Raycast() -> Dictionary:
 	var viewportSize: Vector2 = get_viewport().get_visible_rect().size
