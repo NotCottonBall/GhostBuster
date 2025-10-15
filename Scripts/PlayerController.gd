@@ -50,11 +50,6 @@ func _physics_process(delta: float) -> void:
 		EnableSprint(delta)
 	else:
 		DisableSprint(delta)
-	
-	if Input.is_action_pressed("Crouch"):
-		m_Collider.height = CrouchHeight
-	else:
-		m_Collider.height = StandHeight
 
 	var input_dir := Input.get_vector("MoveLeft", "MoveRight", "MoveForward", "MoveBack")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -76,6 +71,12 @@ func _input(event: InputEvent) -> void:
 
 		rotation_degrees.y = m_Yaw
 		$Head.rotation_degrees.x = m_Pitch
+
+	if Input.is_action_just_pressed("Crouch"):
+		m_Collider.height = CrouchHeight
+	if Input.is_action_just_released("Crouch"):
+		position.y += CrouchHeight / 2
+		m_Collider.height = StandHeight
 
 	if event.is_action_pressed("SecondaryAction"):
 		var item: Item = m_ItemHolder.PlayerInventory[m_CurrentHoldingIndex]
