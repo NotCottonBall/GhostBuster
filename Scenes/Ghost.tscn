@@ -1,6 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://5bfrmrcjyibn"]
 
 [ext_resource type="Script" uid="uid://doe3xore2ch2" path="res://Scripts/Ghost.gd" id="1_infc1"]
+[ext_resource type="PackedScene" uid="uid://c5dpbdsfnlyeo" path="res://Models/Ghost/ZombieGuy.glb" id="2_rcd3j"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_infc1"]
 radius = 0.3
@@ -9,12 +10,10 @@ radius = 0.3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rcd3j"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_infc1"]
-radius = 0.3
-
 [node name="Ghost" type="CharacterBody3D"]
 collision_layer = 8
 script = ExtResource("1_infc1")
+MovementSpeed = 100.0
 metadata/_custom_type_script = "uid://chhwarsocg4d8"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -35,10 +34,11 @@ debug_color = Color(0.98589724, 0, 0.32436147, 1)
 shape = SubResource("SphereShape3D_rcd3j")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_infc1")
+[node name="ZombieGuy" parent="." instance=ExtResource("2_rcd3j")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, -0.995816, 0)
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
 
 [node name="NavTimeout" type="Timer" parent="."]
 wait_time = 10.0

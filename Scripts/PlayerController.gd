@@ -4,8 +4,8 @@ extends CharacterBody3D
 var m_CurrentPlayerSpeed: float = 0.0
 var m_CurrentPlayerStamina: float = 0.0
 var m_Collider: CapsuleShape3D
-@export var PlayerRunSpeed: float = 8.0
-@export var PlayerWalkSpeed: float = 5.0
+@export var PlayerRunSpeed: float = 6.0
+@export var PlayerWalkSpeed: float = 2.5
 @export var PlayerMaxStamina: float = 100.0
 @export var StaminaReductionRate: float = 30.0
 @export var StaminaGainRate: float = 10.0

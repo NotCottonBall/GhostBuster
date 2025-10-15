@@ -6,7 +6,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_0qj7l"]
 size = Vector3(0.17578125, 0.16699219, 0.6308594)
 
-[node name="Flashlight" type="RigidBody3D"]
+[node name="Flashlight" type="RigidBody3D" node_paths=PackedStringArray("m_Light", "ItemMesh")]
 collision_layer = 4
 axis_lock_linear_x = true
 axis_lock_linear_z = true
@@ -14,7 +14,9 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource("1_bdlob")
+m_Light = NodePath("")
 ItemID = 1
+ItemMesh = NodePath("Flashlight")
 metadata/_custom_type_script = "uid://cijyo04ga1ybp"
 
 [node name="Flashlight" parent="." instance=ExtResource("1_ddyce")]
@@ -25,7 +27,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.03466797)
 shape = SubResource("BoxShape3D_0qj7l")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.36455396)
 visible = false
-spot_range = 25.0
+spot_range = 10.0
 spot_angle = 30.0

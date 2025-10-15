@@ -15,6 +15,7 @@ enum HoldableItems
 # Motion Thermo = Oni
 
 @export var ItemID: HoldableItems
+@export var ItemMesh: Node3D
 
 func OnAction() -> void:
 	pass

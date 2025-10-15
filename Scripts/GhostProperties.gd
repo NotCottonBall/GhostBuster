@@ -19,8 +19,8 @@ enum GhostTypes {
 @export var ThrowForce: float = 5.0
 
 @export_group("Movement Settings")
-@export var MovementSpeed: float = 10.0
-@export var TurnSpeed: float = 5.0
+@export var MovementSpeed: float = 100.0
+@export var TurnSpeed: float = 50.0
 
 var m_NavTimeout: Timer
 
@@ -60,8 +60,6 @@ func PickRandomNavLocation() -> void:
 	var randomPoint: Vector3 = NavigationServer3D.map_get_random_point(navMapRID, m_NavAgent.navigation_layers, false)
 	var randomPos: Vector3 = NavigationServer3D.map_get_closest_point(navMapRID, randomPoint)
 	m_NavAgent.target_position = randomPos
-	print("Ghost Wants To Go To:")
-	print(randomPos)
 
 
 func _physics_process(delta: float) -> void:

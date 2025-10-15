@@ -1,7 +1,7 @@
 extends Item
 class_name Flashlight
 
-@export var m_Light: SpotLight3D
+@export var m_Light: Light3D
 
 func _init() -> void:
   ItemID = HoldableItems.Flashlight

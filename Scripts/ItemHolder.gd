@@ -40,9 +40,9 @@ func DropItem(index: int, newSpawnLocation: Transform3D, parent: Node) -> void:
 func SwitchHoldingItem(oldIndex: int, newIndex: int) -> void:
 	if is_instance_valid(PlayerInventory[oldIndex]):
 		var item: Item = PlayerInventory[oldIndex]
-		item.visible = false
+		item.ItemMesh.visible = false
 	
 	if is_instance_valid(PlayerInventory[newIndex]):
 		var item: Item = PlayerInventory[newIndex]
-		item.visible = true
+		item.ItemMesh.visible = true
 		CurrentHoldingItem = item
