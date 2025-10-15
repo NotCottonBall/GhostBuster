@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://5bfrmrcjyibn"]
 
-[ext_resource type="Script" uid="uid://doe3xore2ch2" path="res://Scripts/Ghost.gd" id="1_infc1"]
+[ext_resource type="Script" uid="uid://chhwarsocg4d8" path="res://Scripts/Ghost.gd" id="1_infc1"]
 [ext_resource type="PackedScene" uid="uid://c5dpbdsfnlyeo" path="res://Models/Ghost/ZombieGuy.glb" id="2_rcd3j"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_infc1"]
@@ -13,8 +13,6 @@ radius = 0.3
 [node name="Ghost" type="CharacterBody3D"]
 collision_layer = 8
 script = ExtResource("1_infc1")
-MovementSpeed = 100.0
-metadata/_custom_type_script = "uid://chhwarsocg4d8"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_infc1")
@@ -40,6 +38,12 @@ transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, -0.995816, 0)
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_enabled = true
 
-[node name="NavTimeout" type="Timer" parent="."]
-wait_time = 10.0
+[node name="NavCooldownTimer" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
+
+[node name="NavTimeoutTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[connection signal="timeout" from="NavCooldownTimer" to="." method="_on_nav_cooldown_timer_timeout"]
+[connection signal="timeout" from="NavTimeoutTimer" to="." method="_on_nav_timeout_timer_timeout"]
