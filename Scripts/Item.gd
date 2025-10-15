@@ -10,6 +10,10 @@ enum HoldableItems
 	Thermometer
 }
 
+# EMF Thermo = Sprit
+# EMF Motion = Demon
+# Motion Thermo = Oni
+
 @export var ItemID: HoldableItems
 
 func OnAction() -> void:

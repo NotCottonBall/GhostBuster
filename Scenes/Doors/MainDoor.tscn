@@ -7,6 +7,8 @@
 size = Vector3(1.4558411, 2.6854858, 0.09765625)
 
 [node name="MainDoor" type="StaticBody3D"]
+collision_layer = 16
+collision_mask = 23
 script = ExtResource("1_38ogf")
 m_OpenRotation = 90.0
 metadata/_custom_type_script = "uid://qboy84mteblk"

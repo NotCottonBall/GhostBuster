@@ -3,11 +3,14 @@ extends CharacterBody3D
 @export_group("Movement Settings")
 var m_CurrentPlayerSpeed: float = 0.0
 var m_CurrentPlayerStamina: float = 0.0
+var m_Collider: CapsuleShape3D
 @export var PlayerRunSpeed: float = 8.0
 @export var PlayerWalkSpeed: float = 5.0
 @export var PlayerMaxStamina: float = 100.0
 @export var StaminaReductionRate: float = 30.0
 @export var StaminaGainRate: float = 10.0
+@export var CrouchHeight: float = 0.8
+@export var StandHeight: float = 2.0
 
 # Todo: Remove this before exporting
 var m_MouseCaptured: bool = true
@@ -16,7 +19,7 @@ var m_MouseCaptured: bool = true
 var m_Camera: Camera3D
 var m_Yaw: float = 0.0
 var m_Pitch: float = 0.0
-@export var MouseSensiticity: float = 0.4
+@export var MouseSensiticity: float = 0.2
 
 @export_group("Item Holder")
 var m_ItemHolder: ItemHolder
@@ -28,6 +31,7 @@ func _ready() -> void:
 	m_CurrentPlayerStamina = PlayerMaxStamina
 	m_Camera = $Head/Camera3D
 	m_ItemHolder = $Head/ItemHolder
+	m_Collider = $CollisionShape3D.shape
 	
 	if m_MouseCaptured:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -46,6 +50,11 @@ func _physics_process(delta: float) -> void:
 		EnableSprint(delta)
 	else:
 		DisableSprint(delta)
+	
+	if Input.is_action_pressed("Crouch"):
+		m_Collider.height = CrouchHeight
+	else:
+		m_Collider.height = StandHeight
 
 	var input_dir := Input.get_vector("MoveLeft", "MoveRight", "MoveForward", "MoveBack")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
