@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://5bfrmrcjyibn"]
+[gd_scene load_steps=7 format=3 uid="uid://5bfrmrcjyibn"]
 
 [ext_resource type="Script" uid="uid://chhwarsocg4d8" path="res://Scripts/Ghost.gd" id="1_infc1"]
 [ext_resource type="PackedScene" uid="uid://c5dpbdsfnlyeo" path="res://Models/Ghost/ZombieGuy.glb" id="2_rcd3j"]
@@ -7,8 +7,13 @@
 radius = 0.3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_infc1"]
+radius = 4.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rcd3j"]
+radius = 6.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hmvil"]
+radius = 3.5
 
 [node name="Ghost" type="CharacterBody3D"]
 collision_layer = 8
@@ -24,13 +29,23 @@ collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
 shape = SubResource("SphereShape3D_infc1")
-debug_color = Color(0.98589724, 0, 0.32436147, 1)
+debug_color = Color(0.6083407, 0.36055556, 1, 1)
 
 [node name="HintArea" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HintArea"]
 shape = SubResource("SphereShape3D_rcd3j")
 debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="PlayerDetectionRadius" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetectionRadius"]
+shape = SubResource("SphereShape3D_hmvil")
+debug_color = Color(0.6414837, 0, 0.1201025, 1)
 
 [node name="ZombieGuy" parent="." instance=ExtResource("2_rcd3j")]
 transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, -0.995816, 0)
@@ -45,5 +60,12 @@ one_shot = true
 [node name="NavTimeoutTimer" type="Timer" parent="."]
 wait_time = 10.0
 
+[node name="HuntCooldown" type="Timer" parent="."]
+wait_time = 60.0
+
+[node name="PlayerDetectionCooldown" type="Timer" parent="."]
+wait_time = 5.0
+
 [connection signal="timeout" from="NavCooldownTimer" to="." method="_on_nav_cooldown_timer_timeout"]
 [connection signal="timeout" from="NavTimeoutTimer" to="." method="_on_nav_timeout_timer_timeout"]
+[connection signal="timeout" from="PlayerDetectionCooldown" to="." method="_on_player_detection_cooldown_timeout"]

@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name Player
 
 @export_group("Movement Settings")
 var m_CurrentPlayerSpeed: float = 0.0
