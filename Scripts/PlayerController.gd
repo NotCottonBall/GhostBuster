@@ -132,8 +132,6 @@ func Interact() -> void:
 	if collider == null:
 		return
 
-	print(collider.name)
-
 	if collider is Item:
 		var item: Item = collider
 		m_ItemHolder.HoldItem(m_CurrentHoldingIndex, item)

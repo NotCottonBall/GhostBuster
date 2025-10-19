@@ -109,20 +109,25 @@ func TryLookForPlayer() -> void:
 	for i in overlappingObjs:
 		if i is Player:
 			player = i
+			break
 
 	if player == null:
 		m_PlayerDetectionCooldown.start()
 		return
 	
 	var visionRaycast: RayCast3D = $VisionRaycast
-	visionRaycast.look_at(player.global_position, Vector3.UP)
+	visionRaycast.target_position = visionRaycast.to_local(player.global_position)
 	visionRaycast.force_raycast_update()
 	
-	if visionRaycast.is_colliding():
-		# ERROR HERE
-		if visionRaycast.get_collider().name == "Player":
-			m_PlayerFound = true
-			m_NavAgent.target_position = player.global_position
+	if not visionRaycast.is_colliding():
+		return
+
+
+	var collider: Object = visionRaycast.get_collider()
+	print(collider.name)
+	if collider == player:
+		m_PlayerFound = true
+		m_NavAgent.target_position = player.global_position
 
 
 func GoToNextNavPos(delta: float, timeout: Timer) -> void:
