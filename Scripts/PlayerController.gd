@@ -20,9 +20,11 @@ var m_MouseCaptured: bool = true
 var m_Camera: Camera3D
 var m_Yaw: float = 0.0
 var m_Pitch: float = 0.0
-@export var MouseSensiticity: float = 0.2
+@export var MouseSensitivity: float = 0.2
+@export var ControllerCamSensitivity: float = 0.8
 
 @export_group("Item Holder")
+var m_Raycast: RayCast3D
 var m_ItemHolder: ItemHolder
 var m_CurrentHoldingIndex: int = 0
 @export var m_InteractionRayLength: float = 2.5
@@ -31,6 +33,7 @@ func _ready() -> void:
 	m_CurrentPlayerSpeed = PlayerWalkSpeed
 	m_CurrentPlayerStamina = PlayerMaxStamina
 	m_Camera = $Head/Camera3D
+	m_Raycast = $Head/RayCast3D
 	m_ItemHolder = $Head/ItemHolder
 	m_Collider = $CollisionShape3D.shape
 	
@@ -40,7 +43,14 @@ func _ready() -> void:
 	m_Pitch = 0.0
 
 func _process(delta: float) -> void:
-	pass
+	var camMotionVectorX: float = Input.get_axis("LookLeft", "LookRight")
+	var camMotionVectorY: float = Input.get_axis("LookDown", "LookUp")
+	m_Yaw -= camMotionVectorX * ControllerCamSensitivity
+	m_Pitch += camMotionVectorY * ControllerCamSensitivity
+	m_Pitch = clamp(m_Pitch, -89.0, 89.0)
+	rotation_degrees.y = m_Yaw
+	$Head.rotation_degrees.x = m_Pitch
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -66,10 +76,9 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		m_Yaw -= event.relative.x * MouseSensiticity
-		m_Pitch -= event.relative.y * MouseSensiticity
+		m_Yaw -= event.relative.x * MouseSensitivity
+		m_Pitch -= event.relative.y * MouseSensitivity
 		m_Pitch = clamp(m_Pitch, -89.0, 89.0)
-
 		rotation_degrees.y = m_Yaw
 		$Head.rotation_degrees.x = m_Pitch
 
@@ -113,6 +122,8 @@ func Interact() -> void:
 	var ray: Dictionary = Raycast()
 	if ray.is_empty():
 		return
+
+	print(ray.collider.name)
 
 	if ray.collider is Item:
 		var item: Item = ray.collider

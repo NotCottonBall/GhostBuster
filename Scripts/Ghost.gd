@@ -60,7 +60,7 @@ func _process(delta: float) -> void:
 	
 	GoToNextNavPos(delta, m_PlayerDetectionCooldown)
 
-	print(m_PlayerFound)
+	# print(m_PlayerFound)
 
 
 func PickRandomNavLocation() -> void:
@@ -102,7 +102,8 @@ func TryThrowSomething() -> void:
 
 
 func TryLookForPlayer() -> void:
-	var overlappingObjs: Array[Node3D] = $PlayerDetectionRadius.get_overlapping_bodies()
+	var area: Area3D = $PlayerDetectionArea
+	var overlappingObjs: Array[Node3D] = area.get_overlapping_bodies()
 	var player: Player = null
 	
 	for i in overlappingObjs:
@@ -113,8 +114,15 @@ func TryLookForPlayer() -> void:
 		m_PlayerDetectionCooldown.start()
 		return
 	
-	m_PlayerFound = true
-	m_NavAgent.target_position = player.global_position
+	var visionRaycast: RayCast3D = $VisionRaycast
+	visionRaycast.look_at(player.global_position, Vector3.UP)
+	visionRaycast.force_raycast_update()
+	
+	if visionRaycast.is_colliding():
+		# ERROR HERE
+		if visionRaycast.get_collider().name == "Player":
+			m_PlayerFound = true
+			m_NavAgent.target_position = player.global_position
 
 
 func GoToNextNavPos(delta: float, timeout: Timer) -> void:

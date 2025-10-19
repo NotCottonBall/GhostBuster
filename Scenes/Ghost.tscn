@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://5bfrmrcjyibn"]
+[gd_scene load_steps=8 format=3 uid="uid://5bfrmrcjyibn"]
 
 [ext_resource type="Script" uid="uid://chhwarsocg4d8" path="res://Scripts/Ghost.gd" id="1_infc1"]
+[ext_resource type="PackedScene" uid="uid://dckjt6fuxo1er" path="res://Models/Others/Cone.res" id="2_hmvil"]
 [ext_resource type="PackedScene" uid="uid://c5dpbdsfnlyeo" path="res://Models/Ghost/ZombieGuy.glb" id="2_rcd3j"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_infc1"]
@@ -12,12 +13,20 @@ radius = 4.5
 [sub_resource type="SphereShape3D" id="SphereShape3D_rcd3j"]
 radius = 6.0
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_hmvil"]
-radius = 3.5
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hmvil"]
+points = PackedVector3Array(-0.00019574165, 0, -0.00019574165, 0.19498825, -2, -0.9808144, -0.00019574165, -2, -1, -0.19518405, -2, -0.9808144, -0.382733, -2, -0.92404073, -0.5555991, -2, -0.83163667, -0.7071261, -2, -0.7071261, -0.83163667, -2, -0.5555991, -0.92404073, -2, -0.382733, -0.9808144, -2, -0.19518405, -1, -2, -0.00019574165, -0.9808144, -2, 0.19498825, -0.92404073, -2, 0.38253725, -0.83163667, -2, 0.55540323, -0.7071261, -2, 0.7069303, -0.5555991, -2, 0.8314409, -0.382733, -2, 0.92384493, -0.19518405, -2, 0.9806186, -0.00019574165, -2, 1, 0.19498825, -2, 0.9806186, 0.38253725, -2, 0.92384493, 0.55540323, -2, 0.8314409, 0.7069303, -2, 0.7069303, 0.8314409, -2, 0.55540323, 0.92384493, -2, 0.38253725, 0.9806186, -2, 0.19498825, 1, -2, -0.00019574165, 0.9806186, -2, -0.19518405, 0.92384493, -2, -0.382733, 0.8314409, -2, -0.5555991, 0.7069303, -2, -0.7071261, 0.55540323, -2, -0.83163667, 0.38253725, -2, -0.92404073)
 
 [node name="Ghost" type="CharacterBody3D"]
 collision_layer = 8
 script = ExtResource("1_infc1")
+Type = null
+InteractionRadius = null
+HintRadius = null
+PlayerDetectionRadius = null
+ThrowChance = null
+ThrowForce = null
+HuntChance = null
+MovementSpeed = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_infc1")
@@ -39,13 +48,21 @@ collision_mask = 4
 shape = SubResource("SphereShape3D_rcd3j")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
-[node name="PlayerDetectionRadius" type="Area3D" parent="."]
+[node name="PlayerDetectionArea" type="Area3D" parent="."]
 collision_layer = 8
-collision_mask = 2
+collision_mask = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetectionRadius"]
-shape = SubResource("SphereShape3D_hmvil")
-debug_color = Color(0.6414837, 0, 0.1201025, 1)
+[node name="Cone" parent="PlayerDetectionArea" instance=ExtResource("2_hmvil")]
+transform = Transform3D(5, 0, 0, 0, -2.1855695e-07, 5, 0, -5, -2.1855695e-07, 0, 1.154851, -2.3590305)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetectionArea"]
+transform = Transform3D(5, 0, 0, 0, -2.1855695e-07, 5, 0, -5, -2.1855695e-07, 0, 1.154851, -2.3590305)
+shape = SubResource("ConvexPolygonShape3D_hmvil")
+
+[node name="VisionRaycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1597307, 0)
+target_position = Vector3(0, 0, 7.5)
 
 [node name="ZombieGuy" parent="." instance=ExtResource("2_rcd3j")]
 transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, -0.995816, 0)
