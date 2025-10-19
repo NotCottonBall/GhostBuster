@@ -13,8 +13,9 @@ var m_Collider: CapsuleShape3D
 @export var CrouchHeight: float = 0.8
 @export var StandHeight: float = 2.0
 
-# Todo: Remove this before exporting
+# DEBUG_ONLY	
 var m_MouseCaptured: bool = true
+#
 
 @export_group("Camera Settings")
 var m_Camera: Camera3D
@@ -27,7 +28,6 @@ var m_Pitch: float = 0.0
 var m_Raycast: RayCast3D
 var m_ItemHolder: ItemHolder
 var m_CurrentHoldingIndex: int = 0
-@export var m_InteractionRayLength: float = 2.5
 
 func _ready() -> void:
 	m_CurrentPlayerSpeed = PlayerWalkSpeed
@@ -45,12 +45,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var camMotionVectorX: float = Input.get_axis("LookLeft", "LookRight")
 	var camMotionVectorY: float = Input.get_axis("LookDown", "LookUp")
-	m_Yaw -= camMotionVectorX * ControllerCamSensitivity
-	m_Pitch += camMotionVectorY * ControllerCamSensitivity
-	m_Pitch = clamp(m_Pitch, -89.0, 89.0)
-	rotation_degrees.y = m_Yaw
-	$Head.rotation_degrees.x = m_Pitch
-
+	if camMotionVectorX != 0.0 or camMotionVectorY != 0.0:
+		# DEBUG_ONLY
+		if m_MouseCaptured:
+		#
+			m_Yaw -= camMotionVectorX * ControllerCamSensitivity
+			m_Pitch += camMotionVectorY * ControllerCamSensitivity
+			m_Pitch = clamp(m_Pitch, -89.0, 89.0)
+			rotation_degrees.y = m_Yaw
+			$Head.rotation_degrees.x = m_Pitch
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -76,11 +79,14 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		m_Yaw -= event.relative.x * MouseSensitivity
-		m_Pitch -= event.relative.y * MouseSensitivity
-		m_Pitch = clamp(m_Pitch, -89.0, 89.0)
-		rotation_degrees.y = m_Yaw
-		$Head.rotation_degrees.x = m_Pitch
+		# DEBUG_ONLY
+		if m_MouseCaptured:
+		#
+			m_Yaw -= event.relative.x * MouseSensitivity
+			m_Pitch -= event.relative.y * MouseSensitivity
+			m_Pitch = clamp(m_Pitch, -89.0, 89.0)
+			rotation_degrees.y = m_Yaw
+			$Head.rotation_degrees.x = m_Pitch
 
 	if Input.is_action_just_pressed("Crouch"):
 		m_Collider.height = CrouchHeight
@@ -119,35 +125,20 @@ func _input(event: InputEvent) -> void:
 		m_CurrentHoldingIndex = (m_CurrentHoldingIndex + 1) % m_ItemHolder.MaxHoldableItems
 
 func Interact() -> void:
-	var ray: Dictionary = Raycast()
-	if ray.is_empty():
+	if not m_Raycast.is_colliding():
 		return
 
-	print(ray.collider.name)
+	var collider: Object = m_Raycast.get_collider()
+	if collider == null:
+		return
 
-	if ray.collider is Item:
-		var item: Item = ray.collider
+	print(collider.name)
+
+	if collider is Item:
+		var item: Item = collider
 		m_ItemHolder.HoldItem(m_CurrentHoldingIndex, item)
-	
-	if ray.collider is Door:
-		print(ray.collider.name)
-		ray.collider.ToggleDoor()
-
-
-func Raycast() -> Dictionary:
-	var viewportSize: Vector2 = get_viewport().get_visible_rect().size
-	var viewportCenter: Vector2 = viewportSize / 2
-	
-	var rayOrigin: Vector3 = m_Camera.project_ray_origin(viewportCenter)
-	var rayDirection: Vector3 = m_Camera.project_ray_normal(viewportCenter)
-	var rayEnd: Vector3 = rayOrigin + rayDirection * m_InteractionRayLength
-
-	var ray: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd)
-	ray.collide_with_areas = true
-	ray.collide_with_bodies = true
-
-	var spaceState: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
-	return spaceState.intersect_ray(ray)
+	if collider is Door:
+		collider.ToggleDoor()
 
 
 func EnableSprint(delta: float) -> void:

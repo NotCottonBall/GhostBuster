@@ -22,12 +22,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9755198, 0)
 transform = Transform3D(0.9960427, 0, 0.0888769, 0, 1, 0, -0.0888769, 0, 0.9960427, 0.8041475, -0.6374209, -0.9171998)
 script = ExtResource("2_kyqiw")
 
+[node name="RayCast3D" type="RayCast3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14161134, 0)
+target_position = Vector3(0, 0, -2.5)
+collision_mask = 20
+collide_with_areas = true
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_qbkls")
 
 [node name="Hud" parent="." instance=ExtResource("3_gntrk")]
-
-[node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83390844, 0)
-target_position = Vector3(0, 0, -2.125)
-collision_mask = 4
