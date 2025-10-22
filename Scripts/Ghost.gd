@@ -60,7 +60,7 @@ func _process(delta: float) -> void:
 	
 	GoToNextNavPos(delta, m_PlayerDetectionCooldown)
 
-	# print(m_PlayerFound)
+	print(m_PlayerFound)
 
 
 func PickRandomNavLocation() -> void:
@@ -112,8 +112,9 @@ func TryLookForPlayer() -> void:
 			break
 
 	if player == null:
-		m_PlayerDetectionCooldown.start()
 		return
+
+	m_PlayerDetectionCooldown.start()
 	
 	var visionRaycast: RayCast3D = $VisionRaycast
 	visionRaycast.target_position = visionRaycast.to_local(player.global_position)
@@ -124,7 +125,6 @@ func TryLookForPlayer() -> void:
 
 
 	var collider: Object = visionRaycast.get_collider()
-	print(collider.name)
 	if collider == player:
 		m_PlayerFound = true
 		m_NavAgent.target_position = player.global_position
