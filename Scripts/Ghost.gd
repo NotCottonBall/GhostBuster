@@ -60,6 +60,7 @@ func _process(delta: float) -> void:
 	
 	GoToNextNavPos(delta, m_PlayerDetectionCooldown)
 
+	print(m_PlayerDetectionCooldown.time_left)
 	print(m_PlayerFound)
 
 
@@ -112,9 +113,9 @@ func TryLookForPlayer() -> void:
 			break
 
 	if player == null:
+		m_PlayerDetectionCooldown.start()
 		return
 
-	m_PlayerDetectionCooldown.start()
 	
 	var visionRaycast: RayCast3D = $VisionRaycast
 	visionRaycast.target_position = visionRaycast.to_local(player.global_position)

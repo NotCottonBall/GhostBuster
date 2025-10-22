@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://5bfrmrcjyibn"]
+[gd_scene load_steps=9 format=3 uid="uid://5bfrmrcjyibn"]
 
 [ext_resource type="Script" uid="uid://chhwarsocg4d8" path="res://Scripts/Ghost.gd" id="1_infc1"]
 [ext_resource type="PackedScene" uid="uid://dckjt6fuxo1er" path="res://Models/Others/Cone.res" id="2_hmvil"]
@@ -15,6 +15,9 @@ radius = 6.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hmvil"]
 points = PackedVector3Array(-0.00019574165, 0, -0.00019574165, 0.19498825, -2, -0.9808144, -0.00019574165, -2, -1, -0.19518405, -2, -0.9808144, -0.382733, -2, -0.92404073, -0.5555991, -2, -0.83163667, -0.7071261, -2, -0.7071261, -0.83163667, -2, -0.5555991, -0.92404073, -2, -0.382733, -0.9808144, -2, -0.19518405, -1, -2, -0.00019574165, -0.9808144, -2, 0.19498825, -0.92404073, -2, 0.38253725, -0.83163667, -2, 0.55540323, -0.7071261, -2, 0.7069303, -0.5555991, -2, 0.8314409, -0.382733, -2, 0.92384493, -0.19518405, -2, 0.9806186, -0.00019574165, -2, 1, 0.19498825, -2, 0.9806186, 0.38253725, -2, 0.92384493, 0.55540323, -2, 0.8314409, 0.7069303, -2, 0.7069303, 0.8314409, -2, 0.55540323, 0.92384493, -2, 0.38253725, 0.9806186, -2, 0.19498825, 1, -2, -0.00019574165, 0.9806186, -2, -0.19518405, 0.92384493, -2, -0.382733, 0.8314409, -2, -0.5555991, 0.7069303, -2, -0.7071261, 0.55540323, -2, -0.83163667, 0.38253725, -2, -0.92404073)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hmvil"]
+radius = 10.0
 
 [node name="Ghost" type="CharacterBody3D"]
 collision_layer = 8
@@ -50,7 +53,11 @@ visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetectionArea"]
 transform = Transform3D(5, 0, 0, 0, -2.1855695e-07, 5, 0, -5, -2.1855695e-07, 0, 1.154851, -2.3590305)
+visible = false
 shape = SubResource("ConvexPolygonShape3D_hmvil")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="PlayerDetectionArea"]
+shape = SubResource("SphereShape3D_hmvil")
 
 [node name="VisionRaycast" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, 7.5)
