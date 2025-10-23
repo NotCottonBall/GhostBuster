@@ -18,4 +18,7 @@ func OnHintGiven(hintItem: Item.HoldableItems) -> void:
   if IsOn:
     EMFMaterial.emission_texture = EMFLevelTextures[4]
     await get_tree().create_timer(3.0).timeout
-    EMFMaterial.emission_texture = null
+    if IsOn:
+      EMFMaterial.emission_texture = EMFLevelTextures[0]
+    else:
+      EMFMaterial.emission_texture = null
