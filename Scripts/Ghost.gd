@@ -5,19 +5,24 @@ var m_NavAgent: NavigationAgent3D
 
 enum GhostTypes {
 	None,
-	Sprit,
+	Spirit,
 	Demon,
 	Oni,
+	Wraith
 }
 
-@export_group("Ghost Specifications")
+@export_group("Ghost Interaction Specifications")
 @export var m_SpawnPoints: Array[Node3D]
-@export var Type: GhostTypes = GhostTypes.None
 @export var InteractionRadius: float = 4.5
 @export var HintRadius: float = 6.0
 @export var PlayerDetectionRadius: float = 4.0
 @export var ThrowChance: float = 0.1
 @export var ThrowForce: float = 5.0
+
+@export_group("Ghost Hint Specifications")
+var m_ProducesHints: Array[Item.HoldableItems]
+@export var Type: GhostTypes = GhostTypes.None
+@export var HintChance: float = 0.1
 
 @export_group("Ghost Hunt Specifications")
 var m_IsHunting: bool = false
@@ -31,6 +36,7 @@ var m_NavCooldownTimer: Timer
 var m_NavTimeout: Timer
 var m_HuntCooldown: Timer
 var m_PlayerDetectionCooldown: Timer
+var m_HintCooldownTimer: Timer
 
 
 func _ready() -> void:
@@ -43,13 +49,21 @@ func _ready() -> void:
 	m_NavTimeout = $NavTimeoutTimer
 	m_HuntCooldown = $HuntCooldown
 	m_PlayerDetectionCooldown = $PlayerDetectionCooldown
+	m_HintCooldownTimer = $HintCooldownTimer
 
+	# Assign Ghost Hints
+	m_ProducesHints.fill(null)
+	m_ProducesHints = Globals.GetGhostHints(Type)
+	print(m_ProducesHints)
+	
 	SelectSpawn()
 
 
 func _process(delta: float) -> void:
 	if randf() < ThrowChance * delta:
 		TryThrowSomething()
+	if randf() < HintChance * delta:
+		GiveRandomHint()
 
 	if randf() < HuntChance * delta:
 		m_IsHunting = true
@@ -59,9 +73,6 @@ func _process(delta: float) -> void:
 		GoToNextNavPos(delta, m_NavCooldownTimer)
 	
 	GoToNextNavPos(delta, m_PlayerDetectionCooldown)
-
-	print(m_PlayerDetectionCooldown.time_left)
-	print(m_PlayerFound)
 
 
 func PickRandomNavLocation() -> void:
@@ -144,6 +155,11 @@ func GoToNextNavPos(delta: float, timeout: Timer) -> void:
 		velocity = dir * MovementSpeed * delta
 		dir.y = 0
 		look_at(global_position + -dir.normalized())
+
+
+func GiveRandomHint() -> void:
+	var hintToGive: Item.HoldableItems = m_ProducesHints.pick_random()
+	print(hintToGive)
 
 
 func _on_nav_cooldown_timer_timeout() -> void:

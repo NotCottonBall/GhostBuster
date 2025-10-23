@@ -22,6 +22,16 @@ radius = 10.0
 [node name="Ghost" type="CharacterBody3D"]
 collision_layer = 8
 script = ExtResource("1_infc1")
+Type = null
+InteractionRadius = null
+HintRadius = null
+PlayerDetectionRadius = null
+ThrowChance = null
+ThrowForce = null
+HintChance = null
+HintCooldownTime = null
+HuntChance = null
+MovementSpeed = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_infc1")
@@ -82,6 +92,9 @@ wait_time = 10.0
 wait_time = 60.0
 
 [node name="PlayerDetectionCooldown" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="TimeCooldownTimer" type="Timer" parent="."]
 wait_time = 5.0
 
 [connection signal="timeout" from="NavCooldownTimer" to="." method="_on_nav_cooldown_timer_timeout"]
