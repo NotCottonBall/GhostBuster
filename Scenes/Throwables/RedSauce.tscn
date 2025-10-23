@@ -9,6 +9,7 @@ size = Vector3(0.26464844, 0.10345459, 0.24804688)
 [node name="RedSauce" type="RigidBody3D"]
 collision_layer = 4
 collision_mask = 13
+continuous_cd = true
 script = ExtResource("1_bof3b")
 metadata/_custom_type_script = "uid://b0yn76m6fi3ne"
 

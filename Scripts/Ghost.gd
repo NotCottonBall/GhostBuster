@@ -20,6 +20,7 @@ enum GhostTypes {
 @export var ThrowForce: float = 5.0
 
 @export_group("Ghost Hint Specifications")
+var m_CanProduceHint: bool = true
 var m_ProducesHints: Array[Item.HoldableItems]
 @export var Type: GhostTypes = GhostTypes.None
 @export var HintChance: float = 0.1
@@ -32,11 +33,11 @@ var m_PlayerFound: bool = false
 @export_group("Movement Settings")
 @export var MovementSpeed: float = 400.0
 
-var m_NavCooldownTimer: Timer
-var m_NavTimeout: Timer
-var m_HuntCooldown: Timer
-var m_PlayerDetectionCooldown: Timer
-var m_HintCooldownTimer: Timer
+@onready var m_NavCooldownTimer: Timer = $NavCooldownTimer
+@onready var m_NavTimeout: Timer = $NavTimeoutTimer
+@onready var m_HuntCooldown: Timer = $HuntCooldown
+@onready var m_PlayerDetectionCooldown: Timer = $PlayerDetectionCooldown
+@onready var m_HintCooldownTimer: Timer = $HintCooldownTimer
 
 
 func _ready() -> void:
@@ -45,25 +46,23 @@ func _ready() -> void:
 	
 	$InteractionArea/CollisionShape3D.shape.radius = InteractionRadius
 	m_NavAgent = $NavigationAgent3D
-	m_NavCooldownTimer = $NavCooldownTimer
-	m_NavTimeout = $NavTimeoutTimer
-	m_HuntCooldown = $HuntCooldown
-	m_PlayerDetectionCooldown = $PlayerDetectionCooldown
-	m_HintCooldownTimer = $HintCooldownTimer
 
-	# Assign Ghost Hints
+	# Assign Ghost Type and Hints
+	# Type = randi_range(1, GhostTypes.size() - 1)
+	Type = GhostTypes.Spirit
 	m_ProducesHints.fill(null)
 	m_ProducesHints = Globals.GetGhostHints(Type)
-	print(m_ProducesHints)
-	
+
 	SelectSpawn()
 
 
 func _process(delta: float) -> void:
 	if randf() < ThrowChance * delta:
 		TryThrowSomething()
-	if randf() < HintChance * delta:
-		GiveRandomHint()
+	# DEBUG_ONLY
+	# if randf() < HintChance * delta:
+	GiveRandomHint()
+	#
 
 	if randf() < HuntChance * delta:
 		m_IsHunting = true
@@ -158,8 +157,11 @@ func GoToNextNavPos(delta: float, timeout: Timer) -> void:
 
 
 func GiveRandomHint() -> void:
-	var hintToGive: Item.HoldableItems = m_ProducesHints.pick_random()
-	print(hintToGive)
+	if m_CanProduceHint:
+		var hintToGive: Item.HoldableItems = m_ProducesHints.pick_random()
+		GlobalSignals.GhostProduceHintSignal.emit(hintToGive)
+		m_CanProduceHint = false
+		m_HintCooldownTimer.start()
 
 
 func _on_nav_cooldown_timer_timeout() -> void:
@@ -168,6 +170,8 @@ func _on_nav_cooldown_timer_timeout() -> void:
 func _on_nav_timeout_timer_timeout() -> void:
 	PickRandomNavLocation()
 
-
 func _on_player_detection_cooldown_timeout() -> void:
 	m_PlayerFound = false
+
+func _on_ghost_hint_cooldown_timeout() -> void:
+	m_CanProduceHint = true

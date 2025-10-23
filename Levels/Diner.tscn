@@ -1,4 +1,4 @@
-[gd_scene load_steps=788 format=4 uid="uid://b6xt82pp18ybh"]
+[gd_scene load_steps=789 format=4 uid="uid://b6xt82pp18ybh"]
 
 [ext_resource type="Texture2D" uid="uid://ct4aj8bewlk25" path="res://Models/Motel_Trees_Background.png" id="1_ncwcy"]
 [ext_resource type="Texture2D" uid="uid://ttyotin7ay3t" path="res://Models/Motel_V.png" id="2_a71iu"]
@@ -99,6 +99,7 @@
 [ext_resource type="PackedScene" uid="uid://x8kqnh1ovg4a" path="res://Scenes/Throwables/NapkinBox.tscn" id="95_1wfnu"]
 [ext_resource type="PackedScene" uid="uid://bx4k2m0j2775" path="res://Scenes/Throwables/Ketchup.tscn" id="96_c3wom"]
 [ext_resource type="PackedScene" uid="uid://5bfrmrcjyibn" path="res://Scenes/Ghost.tscn" id="99_dc2ui"]
+[ext_resource type="PackedScene" uid="uid://djg016me0num8" path="res://Scenes/Items/EMFDetector.tscn" id="100_8h7sw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dc2ui"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -12157,15 +12158,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.258067, 2.5691614, 23.4521
 [node name="Ghost" parent="." node_paths=PackedStringArray("m_SpawnPoints") instance=ExtResource("99_dc2ui")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.601, 1.4709356, -0.414)
 m_SpawnPoints = [NodePath("../GhostSpawnPoints/SpawnPointLobby0"), NodePath("../GhostSpawnPoints/SpawnPointLobby1"), NodePath("../GhostSpawnPoints/SpawnPointToilet"), NodePath("../GhostSpawnPoints/SpawnPointDining"), NodePath("../GhostSpawnPoints/SpawnPointKitchen"), NodePath("../GhostSpawnPoints/SpawnPointBackroom")]
-InteractionRadius = 4.5
-HintRadius = 6.0
-PlayerDetectionRadius = 4.0
-ThrowChance = 0.1
-ThrowForce = 5.0
-Type = 1
-HintChance = 0.1
-HuntChance = 0.05
 MovementSpeed = 200.0
 
 [node name="Flashlight" parent="." instance=ExtResource("90_nkei5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.000811, -0.11797136, 18.093056)
+
+[node name="EmfDetector" parent="." instance=ExtResource("100_8h7sw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4921074, -0.23709491, 18.21166)

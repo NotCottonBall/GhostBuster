@@ -9,6 +9,7 @@ size = Vector3(0.08618164, 0.24328613, 0.1003418)
 [node name="Ketchup" type="RigidBody3D"]
 collision_layer = 4
 collision_mask = 13
+continuous_cd = true
 script = ExtResource("1_xiafb")
 metadata/_custom_type_script = "uid://b0yn76m6fi3ne"
 

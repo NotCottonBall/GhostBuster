@@ -1,0 +1,36 @@
+[gd_scene load_steps=10 format=3 uid="uid://djg016me0num8"]
+
+[ext_resource type="Script" uid="uid://c0ydrd0202cl3" path="res://Scripts/EMFDetector.gd" id="1_874fe"]
+[ext_resource type="Texture2D" uid="uid://bemqhw0x6ft8i" path="res://Models/Items/EMF_Detector_Emissor.png" id="2_wuh5e"]
+[ext_resource type="Texture2D" uid="uid://dn6hlia3bav13" path="res://Models/Items/EMF_Detector_Emissor_01.png" id="3_c3iep"]
+[ext_resource type="Texture2D" uid="uid://ctmmnxkiierlt" path="res://Models/Items/EMF_Detector_Emissor_02.png" id="4_nn4ef"]
+[ext_resource type="Texture2D" uid="uid://cp3e0ilvikdfn" path="res://Models/Items/EMF_Detector_Emissor_03.png" id="5_5lke1"]
+[ext_resource type="Texture2D" uid="uid://da87o51kcpgbs" path="res://Models/Items/EMF_Detector_Emissor_04.png" id="6_kvow0"]
+[ext_resource type="PackedScene" uid="uid://bsdwwtjqwcjx8" path="res://Models/Items/EMF.glb" id="7_c3iep"]
+[ext_resource type="Material" uid="uid://pf2fchgsfk80" path="res://Models/Items/EMFDetectorMaterial.tres" id="7_nn4ef"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nn4ef"]
+size = Vector3(0.20328957, 0.09684819, 0.50374645)
+
+[node name="EmfDetector" type="RigidBody3D" node_paths=PackedStringArray("ItemMesh")]
+collision_layer = 4
+collision_mask = 5
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+continuous_cd = true
+script = ExtResource("1_874fe")
+EMFLevelTextures = Array[Texture2D]([ExtResource("2_wuh5e"), ExtResource("3_c3iep"), ExtResource("4_nn4ef"), ExtResource("5_5lke1"), ExtResource("6_kvow0")])
+EMFMaterial = ExtResource("7_nn4ef")
+ItemID = 2
+ItemMesh = NodePath("EMF")
+metadata/_custom_type_script = "uid://cijyo04ga1ybp"
+
+[node name="EMF" parent="." instance=ExtResource("7_c3iep")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00059818104, 0.0003771931, 0.011751525)
+shape = SubResource("BoxShape3D_nn4ef")

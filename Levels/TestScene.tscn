@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://yiq4cbrku1v7"]
+[gd_scene load_steps=25 format=3 uid="uid://yiq4cbrku1v7"]
 
 [ext_resource type="Texture2D" uid="uid://35ewlixdxa6i" path="res://Textures/Skybox.png" id="1_fgmgd"]
 [ext_resource type="PackedScene" uid="uid://wtjsp55jknd1" path="res://Scenes/Player.tscn" id="1_kg6ww"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cylovrj44xu71" path="res://Scenes/Throwables/Bread.tscn" id="5_e05af"]
 [ext_resource type="PackedScene" uid="uid://dfww8fpv7p5k4" path="res://Scenes/Throwables/Donut.tscn" id="6_fdlwa"]
 [ext_resource type="PackedScene" uid="uid://5bfrmrcjyibn" path="res://Scenes/Ghost.tscn" id="7_fdlwa"]
+[ext_resource type="PackedScene" uid="uid://djg016me0num8" path="res://Scenes/Items/EMFDetector.tscn" id="8_kb4c1"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_013s3"]
 panorama = ExtResource("1_fgmgd")
@@ -273,3 +274,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5692058, 0, -10.360064)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75860596, 0, -1.0059547)
 shape = SubResource("BoxShape3D_wy0bs")
 debug_color = Color(0.13910213, 0, 0.7615395, 1)
+
+[node name="EmfDetector" parent="." instance=ExtResource("8_kb4c1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2247026, 0.17307334, -1.1282235)

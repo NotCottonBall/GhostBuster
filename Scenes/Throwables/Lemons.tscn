@@ -9,6 +9,7 @@ size = Vector3(0.22949219, 0.051757813, 0.2265625)
 [node name="Lemons" type="RigidBody3D"]
 collision_layer = 4
 collision_mask = 13
+continuous_cd = true
 script = ExtResource("1_0g35q")
 metadata/_custom_type_script = "uid://b0yn76m6fi3ne"
 

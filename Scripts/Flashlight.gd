@@ -15,4 +15,4 @@ func OnAction() -> void:
 
 
 func OnInbuiltAction() -> void:
-  pass
+  m_Light.visible = !m_Light.visible

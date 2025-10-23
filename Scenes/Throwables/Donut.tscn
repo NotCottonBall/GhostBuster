@@ -9,6 +9,7 @@ size = Vector3(0.20898438, 0.065979004, 0.21972656)
 [node name="Donut" type="RigidBody3D"]
 collision_layer = 4
 collision_mask = 13
+continuous_cd = true
 script = ExtResource("1_2r3md")
 metadata/_custom_type_script = "uid://b0yn76m6fi3ne"
 

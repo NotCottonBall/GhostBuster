@@ -98,6 +98,11 @@ func _input(event: InputEvent) -> void:
 		var item: Item = m_ItemHolder.PlayerInventory[m_CurrentHoldingIndex]
 		if item:
 			item.OnAction()
+	if event.is_action_pressed("InbuiltAction"):
+		for i: int in m_ItemHolder.PlayerInventory.size():
+			var item: Item = m_ItemHolder.PlayerInventory[i]
+			if item and item.ItemID == Item.HoldableItems.Flashlight:
+				item.OnInbuiltAction()
 
 	if event.is_action_pressed("Pause"):
 		m_MouseCaptured = !m_MouseCaptured
