@@ -23,6 +23,7 @@ func HoldItem(index: int, item: Item) -> void:
 	PlayerInventory[index] = item
 	add_child(item)
 	item.transform = Transform3D.IDENTITY
+	item.global_rotation_degrees = item.HoldingRotation
 	item.freeze = true
 
 func DropItem(index: int, newSpawnLocation: Transform3D, parent: Node) -> void:

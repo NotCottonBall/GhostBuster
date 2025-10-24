@@ -11,9 +11,10 @@ enum HoldableItems
 	Thermometer
 }
 
+var IsOn: bool = false
 @export var ItemID: HoldableItems
 @export var ItemMesh: Node3D
-var IsOn: bool = false
+@export var HoldingRotation: Vector3
 
 func OnAction() -> void:
 	pass

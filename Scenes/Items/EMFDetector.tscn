@@ -13,6 +13,7 @@
 size = Vector3(0.20328957, 0.09684819, 0.50374645)
 
 [node name="EmfDetector" type="RigidBody3D" node_paths=PackedStringArray("ItemMesh")]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.99999994, 0, 0, 0, 0.9999998, 0, 0, 0)
 collision_layer = 4
 collision_mask = 5
 axis_lock_linear_x = true
@@ -26,6 +27,7 @@ EMFLevelTextures = Array[Texture2D]([ExtResource("2_wuh5e"), ExtResource("3_c3ie
 EMFMaterial = ExtResource("7_nn4ef")
 ItemID = 2
 ItemMesh = NodePath("EMF")
+HoldingRotation = Vector3(10, 0, 30)
 metadata/_custom_type_script = "uid://cijyo04ga1ybp"
 
 [node name="EMF" parent="." instance=ExtResource("7_c3iep")]
