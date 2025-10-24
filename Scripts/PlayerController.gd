@@ -33,7 +33,7 @@ func _ready() -> void:
 	m_CurrentPlayerSpeed = PlayerWalkSpeed
 	m_CurrentPlayerStamina = PlayerMaxStamina
 	m_Camera = $Head/Camera3D
-	m_Raycast = $Head/RayCast3D
+	m_Raycast = $Head/Camera3D/RayCast3D
 	m_ItemHolder = $Head/ItemHolder
 	m_Collider = $CollisionShape3D.shape
 	

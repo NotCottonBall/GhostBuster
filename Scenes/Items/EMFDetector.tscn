@@ -27,7 +27,7 @@ EMFLevelTextures = Array[Texture2D]([ExtResource("2_wuh5e"), ExtResource("3_c3ie
 EMFMaterial = ExtResource("7_nn4ef")
 ItemID = 2
 ItemMesh = NodePath("EMF")
-HoldingRotation = Vector3(10, 0, 30)
+HoldingRotation = Vector3(70, -20, 0)
 metadata/_custom_type_script = "uid://cijyo04ga1ybp"
 
 [node name="EMF" parent="." instance=ExtResource("7_c3iep")]

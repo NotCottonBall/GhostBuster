@@ -1,4 +1,4 @@
-[gd_scene load_steps=789 format=4 uid="uid://b6xt82pp18ybh"]
+[gd_scene load_steps=790 format=4 uid="uid://b6xt82pp18ybh"]
 
 [ext_resource type="Texture2D" uid="uid://ct4aj8bewlk25" path="res://Models/Motel_Trees_Background.png" id="1_ncwcy"]
 [ext_resource type="Texture2D" uid="uid://ttyotin7ay3t" path="res://Models/Motel_V.png" id="2_a71iu"]
@@ -100,6 +100,7 @@
 [ext_resource type="PackedScene" uid="uid://bx4k2m0j2775" path="res://Scenes/Throwables/Ketchup.tscn" id="96_c3wom"]
 [ext_resource type="PackedScene" uid="uid://5bfrmrcjyibn" path="res://Scenes/Ghost.tscn" id="99_dc2ui"]
 [ext_resource type="PackedScene" uid="uid://djg016me0num8" path="res://Scenes/Items/EMFDetector.tscn" id="100_8h7sw"]
+[ext_resource type="PackedScene" uid="uid://q2fkhvrikxtc" path="res://Scenes/Items/SpiritBox.tscn" id="101_hvqr1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dc2ui"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -12165,3 +12166,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.000811, -0.11797136, 18.09
 
 [node name="EmfDetector" parent="." instance=ExtResource("100_8h7sw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4921074, -0.23709491, 18.21166)
+
+[node name="SpiritBox" parent="." instance=ExtResource("101_hvqr1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8717527, -0.23941153, 18.21249)

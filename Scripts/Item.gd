@@ -7,9 +7,11 @@ enum HoldableItems
 	Flashlight,
 	EMFDetector,
 	MotionSensor,
-	SoundSensor,
+	SpiritBox,
 	Thermometer
 }
+
+signal ToggleSignal(toggle: bool)
 
 var IsOn: bool = false
 @export var ItemID: HoldableItems
@@ -29,9 +31,13 @@ func OnHintGiven(hintItem: Item.HoldableItems) -> void:
 	if hintItem == ItemID:
 		HintCallback()
 
+func ToggleCallback(toggle: bool) -> void:
+	pass
+
 
 func _ready() -> void:
 	GlobalSignals.GhostProduceHintSignal.connect(Callable(self, "OnHintGiven"))
+	ToggleSignal.connect(Callable(self, "ToggleCallback"))
 
 func _process(delta: float) -> void:
 	pass

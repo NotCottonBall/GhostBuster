@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://vdv0l1se1qmd"]
+
+[ext_resource type="Texture2D" uid="uid://57t8eifkujfs" path="res://Models/Items/SpiritBox_Spirit_Box.png" id="1_ticpg"]
+[ext_resource type="Texture2D" uid="uid://donscs1kwq7ro" path="res://Models/Items/Spirit_Box_Emissor.png" id="2_mxf6u"]
+
+[resource]
+albedo_texture = ExtResource("1_ticpg")
+emission_texture = ExtResource("2_mxf6u")

@@ -11,6 +11,7 @@ func _ready() -> void:
   m_Light.visible = false
 
 func OnAction() -> void:
+  IsOn = !IsOn
   m_Light.visible = !m_Light.visible
 
 

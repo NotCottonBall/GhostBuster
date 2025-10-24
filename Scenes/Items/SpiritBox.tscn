@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://q2fkhvrikxtc"]
+
+[ext_resource type="Script" uid="uid://cu6gce5dd4qrc" path="res://Scripts/SpiritBox.gd" id="1_qxqki"]
+[ext_resource type="Material" uid="uid://vdv0l1se1qmd" path="res://Models/Items/SpiritBoxMaterial.tres" id="2_bqg15"]
+[ext_resource type="PackedScene" uid="uid://dqn70258mb0jx" path="res://Models/Items/SpiritBox.glb" id="2_qxqki"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qxqki"]
+size = Vector3(0.33166504, 0.09089661, 0.5385132)
+
+[node name="SpiritBox" type="RigidBody3D" node_paths=PackedStringArray("ItemMesh")]
+collision_layer = 4
+collision_mask = 5
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+continuous_cd = true
+script = ExtResource("1_qxqki")
+SBMaterial = ExtResource("2_bqg15")
+ItemID = 4
+ItemMesh = NodePath("SpiritBox")
+HoldingRotation = Vector3(70, -20, 0)
+metadata/_custom_type_script = "uid://cijyo04ga1ybp"
+
+[node name="SpiritBox" parent="." instance=ExtResource("2_qxqki")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0020141602, 0.00049591064, 0.009552002)
+shape = SubResource("BoxShape3D_qxqki")
